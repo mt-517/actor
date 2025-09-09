@@ -53,6 +53,7 @@
     /* small helpers */
     .muted{color:var(--muted)}
     .section-header{display:flex;align-items:center;justify-content:space-between}
+    @media (max-width:464px){header{background-color: white; display: block;text-align: center;}}
   </style>
 </head>
 <body>
@@ -97,7 +98,7 @@
         <section class="card">
           <div class="section-header">
             <h2 style="margin:0">Reels & Clips</h2>
-            <div class="muted" style="font-size:13px">Paste full YouTube/Vimeo URLs into the <code>data-src</code> attributes in the HTML.</div>
+            <div class="muted" style="font-size:13px">Paste YouTube/Vimeo URLs to <code>data-src</code> attributes.</div>
           </div>
 
           <div class="reels" style="margin-top:12px">
