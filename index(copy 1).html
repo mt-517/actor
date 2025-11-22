@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Matthew Thomason — Actor</title>
+    <meta name="description" content="Actor portfolio — showreels, credits, gallery and contact" />
+    <style>
+      :root {
+        --bg: #f7f7f9;
+        --card: #fff;
+        --muted: #6b7280;
+        --accent: #0f172a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial;
+        line-height: 1.5;
+        background: var(--bg);
+        color: var(--accent);
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto 32px auto;
+        padding: 24px;
+      }
+      header {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        padding: 22px;
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+      }
+      .headshot {
+        width: 120px;
+        height: 120px;
+        border-radius: 999px;
+        object-fit: cover;
+        flex: 0 0 120px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 6px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: #111827;
+        color: white;
+      }
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      /* layout */
+      .two-col {
+        grid-template-columns: 2fr 1fr;
+      }
+      @media (max-width: 900px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+      section.card {
+        background: var(--card);
+        padding: 18px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+      }
+
+      /* reels */
+      .reels {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 900px) {
+        .reels {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
+        .reels {
+          grid-template-columns: 1fr;
+        }
+      }
+      .reel {
+        background: #0f172a;
+        color: white;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .reel .meta {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        padding: 10px;
+      }
+      .reel .player {
+        background: #000;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .reel iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      /* gallery */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      @media (max-width: 900px) {
+        .gallery {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .gallery img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        display: block;
+      }
+
+      /* credits & testimonials */
+      .credits li {
+        margin-bottom: 10px;
+      }
+      blockquote {
+        margin: 0;
+        padding-left: 12px;
+        border-left: 4px solid #e6e9ef;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      footer {
+        margin-top: 22px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s;
+      }
+      .lightbox.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .lightbox img {
+        max-width: 98%;
+        max-height: 92%;
+        border-radius: 6px;
+      }
+      .close {
+        position: absolute;
+        top: 18px;
+        right: 22px;
+        background: #fff;
+        border-radius: 999px;
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      /* small helpers */
+      .muted {
+        color: var(--muted);
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      @media (max-width: 464px) {
+        header {
+          background-color: white;
+          display: block;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <img class="headshot" src="/images/MT.jpg" alt="Matthew Thomason headshot (replace with your image)" />
+        <div>
+          <h1>Matthew Thomason</h1>
+          <div class="meta">Actor — Nottingham / London • Playing age: 25–35 • Height: 6'2"</div>
+          <div style="margin-top: 10px; display: flex; gap: 10px; align-items: center">
+            <a class="btn btn-primary" href="Profile - About Me.pdf" download>Download Spotlight PDF</a>
+            <a class="btn" href="mailto:enquiries@spotlight.com">Contact / Book</a>
+          </div>
+        </div>
+      </header>
+
+      <main style="margin-top: 20px" class="grid two-col">
+        <div style="display: grid; gap: 18px">
+          <section class="card">
+            <div class="section-header">
+              <h2 style="margin: 0">About</h2>
+              <!--<div class="muted" style="font-size:13px">Edit content in HTML</div>-->
+            </div>
+            <p style="margin-top: 12px">
+              Experienced stage and screen actor with excellent comic timing and physicality. Natural mover who can sing
+              and dance. Fluent French speaker. Reliable, collaborative and ready to contribute to every production.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px">
+              <div>
+                <strong>Skills</strong>
+                <div class="muted" style="margin-top: 6px; font-size: 14px">
+                  Accents: RP, American-California, French, Northern, Scottish<br />Languages: French (fluent)<br />Singing,
+                  Dance, Movement
+                </div>
+              </div>
+              <div>
+                <strong>Sports &amp; Licences</strong>
+                <div class="muted" style="margin-top: 6px; font-size: 14px">
+                  Freediving, Skateboarding, Sailing<br />Car & Motorcycle licence
+                </div>
+              </div>
+              <div>
+                <strong>Training</strong>
+                <div class="muted" style="margin-top: 6px; font-size: 14px">Actors Workshop Nottingham — part-time</div>
+              </div>
+            </div>
+          </section>
+          <section class="card">
+            <h3 style="margin: 0 0 8px 0">Headshots</h3>
+            <div class="gallery">
+              <img
+                style="object-position: 50% 38%"
+                src="/images/MT1s.jpeg"
+                alt="production 3"
+                data-large="/images/MT1.jpg" />
+              <img
+                style="object-position: 50% 52%"
+                src="/images/MT2s.jpeg"
+                alt="production 3"
+                data-large="/images/MT2.jpg" />
+              <img
+                style="object-position: 50% 46%"
+                src="/images/MT3s.jpeg"
+                alt="production 3"
+                data-large="/images/MT3.jpg" />
+              <img
+                style="object-position: 50% 38%"
+                src="/images/MT4s.jpeg"
+                alt="production 3"
+                data-large="/images/MT4.jpg" />
+            </div>
+          </section>
+          <section class="card">
+            <div class="section-header">
+              <h2 style="margin: 0">Reels &amp; Clips</h2>
+              <div class="muted" style="font-size: 13px">
+                Paste YouTube/Vimeo URLs to <code>data-src</code> attributes.
+              </div>
+            </div>
+
+            <div class="reels" style="margin-top: 12px">
+              <div class="reel">
+                <div class="meta">Screen Showreel</div>
+                <!--<div class="player" data-src="" data-type="iframe">Click to load</div>-->
+                <div>
+                  <video controls>
+                    <source src="/videos/showreel-2025-720.mp4" type="video/mp4" />
+                    <!--<source src="movie.ogg" type="video/ogg">-->
+                    <!--Your browser does not support the video tag.-->
+                  </video>
+                </div>
+              </div>
+
+              <div class="reel">
+                <div class="meta">Voice Reel</div>
+                <div class="player" data-src="" data-type="iframe">Click to load</div>
+              </div>
+
+              <div class="reel">
+                <div class="meta">Accent Reel</div>
+                <div class="player" data-src="" data-type="iframe">Click to load</div>
+              </div>
+
+              <div class="reel">
+                <div class="meta">Stunt / Combat Reel</div>
+                <div class="player" data-src="" data-type="iframe">Click to load</div>
+              </div>
+
+              <div class="reel">
+                <div class="meta">Singing Reel</div>
+                <div class="player" data-src="" data-type="iframe">Click to load</div>
+              </div>
+
+              <div class="reel">
+                <div class="meta">Dance Reel</div>
+                <div class="player" data-src="" data-type="iframe">Click to load</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2 style="margin: 0 0 10px 0">Selected Credits</h2>
+            <ul class="credits" style="list-style: none; padding: 0; margin: 0; font-size: 15px">
+              <li><strong>Lovers' Vows</strong> — Frederic Friburg • Kenneth Michaels • 2025 (Stage)</li>
+              <li>
+                <strong>The Polar Express</strong> — Conductor/Hobo/Chef • Paul Andrew Goldsmith • 2024 (Immersive)
+              </li>
+              <li>
+                <strong>Guys &amp; Dolls</strong> — Harry the Horse / Benny Southstreet • Chris Sims • 2024 (Musical)
+              </li>
+              <li><strong>TAWN-19</strong> — Everett Pickering • Tim Bryn Smith • 2020 (Feature Film)</li>
+            </ul>
+            <div class="muted" style="margin-top: 10px">
+              Full credits are available in the downloadable Spotlight PDF.
+            </div>
+          </section>
+        </div>
+
+        <aside style="display: grid; gap: 18px">
+          <section class="card">
+            <h3 style="margin: 0 0 8px 0">Practical</h3>
+            <div class="muted">
+              Representation: Self-represented — enquiries:
+              <a href="mailto:enquiries@spotlight.com">enquiries@spotlight.com</a>
+            </div>
+            <div style="margin-top: 10px" class="muted">
+              Height: 6'2" • Playing age: 25–35 • Location: Nottingham / London
+            </div>
+          </section>
+          <section class="card">
+            <h3 style="margin: 0 0 8px 0">Production Gallery</h3>
+            <div class="gallery">
+              <img
+                style="object-position: 50% 20%"
+                src="/images/IMG_3633.JPG"
+                alt="production 1"
+                data-large="/images/IMG_3633.JPG" />
+              <img
+                style="object-position: 50% 0%"
+                src="/images/matthew-action5%20copy.jpg"
+                alt="production 2"
+                data-large="/images/matthew-action5.jpg" />
+              <img
+                style="object-position: 73% 11%"
+                src="/imgs/LMT_Guys%20n%20Dolls_034copy.jpg"
+                alt="production 3"
+                data-large="/imgs/LMT_Guys%20n%20Dolls_034.jpg" />
+              <img
+                style="object-position: 50% 22%"
+                src="/imgs/LMT_Nell%20Gwynn_1%20copy.jpg"
+                alt="production 4"
+                data-large="/imgs/LMT_Nell%20Gwynn_1.jpg" />
+              <img
+                style="object-position: 45% 32%"
+                src="/images/matthew-action1%20copy.jpg"
+                alt="production 5"
+                data-large="/images/matthew-action1.jpg" />
+              <img
+                style="object-position: 72% 12%"
+                src="/images/matthew-action2%20copy.jpg"
+                alt="headshot 2"
+                data-large="/images/matthew-action1.jpg" />
+              
+            </div>
+            <div class="muted" style="margin-top: 8px; font-size: 13px">Click an image to view full size.</div>
+          </section>
+          <section class="card">
+            <h2 style="margin: 0 0 10px 0">Director Feedback</h2>
+            <div style="display: grid; gap: 10px">
+              <blockquote>
+                “A calming and positive presence on set — incredibly reliable and inventive.” — Director (replace with
+                real name)
+              </blockquote>
+              <blockquote>
+                “Fantastic comic timing and physicality; a natural mover.” — Director (replace with real name)
+              </blockquote>
+            </div>
+          </section>
+          <section class="card">
+            <h3 style="margin: 0 0 8px 0">Downloads</h3>
+            <a class="btn" href="Profile - About Me.pdf" download>Download Spotlight PDF</a>
+          </section>
+        </aside>
+      </main>
+
+      <footer>© Matthew Thomason — actor. Built with a single HTML file.</footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <button class="close" id="lbClose" aria-label="Close">✕</button>
+      <img id="lbImage" src="/images/IMG_3633.JPG" alt="" />
+    </div>
+
+    <script>
+      // Simple lightbox
+      const gallery = document.querySelectorAll(".gallery img");
+      const lightbox = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImage");
+      const lbClose = document.getElementById("lbClose");
+
+      gallery.forEach((img) => {
+        img.addEventListener("click", () => {
+          lbImg.src = img.dataset.large || img.src;
+          lightbox.classList.add("open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+      lbClose.addEventListener("click", () => {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lbImg.src = "";
+      });
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove("open");
+          lightbox.setAttribute("aria-hidden", "true");
+          lbImg.src = "";
+        }
+      });
+
+      // Lazy-load reels on click — paste video URLs into data-src attributes above
+      document.querySelectorAll(".player").forEach((player) => {
+        player.addEventListener("click", () => {
+          const src = player.dataset.src && player.dataset.src.trim();
+          if (!src) {
+            player.innerHTML = '<span style="color:#9ca3af">No URL set — edit HTML to add video URL in data-src</span>';
+            return;
+          }
+          const iframe = document.createElement("iframe");
+          iframe.src = src;
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          iframe.setAttribute("allowfullscreen", "");
+          player.innerHTML = "";
+          player.appendChild(iframe);
+        });
+      });
+
+      // Accessibility: allow closing lightbox with Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          lightbox.classList.remove("open");
+          lightbox.setAttribute("aria-hidden", "true");
+          lbImg.src = "";
+        }
+      });
+    </script>
+  </body>
+</html>

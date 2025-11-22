@@ -1,497 +1,445 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matthew Thomason — Actor</title>
-    <meta name="description" content="Actor portfolio — showreels, credits, gallery and contact" />
+    <meta name="description" content="Actor portfolio — showreels, credits, gallery and contact">
+    
+    <!-- Tailwind CSS for instant styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons for nice UI elements -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-      :root {
-        --bg: #f7f7f9;
-        --card: #fff;
-        --muted: #6b7280;
-        --accent: #0f172a;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family:
-          Inter,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          "Segoe UI",
-          Roboto,
-          "Helvetica Neue",
-          Arial;
-        line-height: 1.5;
-        background: var(--bg);
-        color: var(--accent);
-      }
-      .container {
-        max-width: 1100px;
-        margin: 0 auto 32px auto;
-        padding: 24px;
-      }
-      header {
-        display: flex;
-        gap: 18px;
-        align-items: center;
-        padding: 22px;
-        background: var(--card);
-        border-radius: 14px;
-        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-      }
-      .headshot {
-        width: 120px;
-        height: 120px;
-        border-radius: 999px;
-        object-fit: cover;
-        flex: 0 0 120px;
-      }
-      h1 {
-        margin: 0;
-        font-size: 28px;
-      }
-      .meta {
-        color: var(--muted);
-        font-size: 14px;
-        margin-top: 6px;
-      }
-      .btn {
-        display: inline-block;
-        padding: 10px 14px;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-      }
-      .btn-primary {
-        background: #111827;
-        color: white;
-      }
-      .grid {
-        display: grid;
-        gap: 18px;
-      }
+        /* Custom tweaks */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
 
-      /* layout */
-      .two-col {
-        grid-template-columns: 2fr 1fr;
-      }
-      @media (max-width: 900px) {
-        .two-col {
-          grid-template-columns: 1fr;
-        }
-      }
-      section.card {
-        background: var(--card);
-        padding: 18px;
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
-      }
+        /* Hide scrollbar for gallery but allow scroll */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-      /* reels */
-      .reels {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-      }
-      @media (max-width: 900px) {
-        .reels {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 560px) {
-        .reels {
-          grid-template-columns: 1fr;
-        }
-      }
-      .reel {
-        background: #0f172a;
-        color: white;
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      .reel .meta {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 13px;
-        padding: 10px;
-      }
-      .reel .player {
-        background: #000;
-        height: 180px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .reel iframe {
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
+        /* Image hover effects */
+        .gallery-item { transition: transform 0.3s ease, opacity 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.02); opacity: 0.95; }
 
-      /* gallery */
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-      }
-      @media (max-width: 900px) {
-        .gallery {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-      @media (max-width: 600px) {
-        .gallery {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      .gallery img {
-        width: 100%;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 8px;
-        cursor: pointer;
-        display: block;
-      }
-
-      /* credits & testimonials */
-      .credits li {
-        margin-bottom: 10px;
-      }
-      blockquote {
-        margin: 0;
-        padding-left: 12px;
-        border-left: 4px solid #e6e9ef;
-        color: var(--muted);
-        font-style: italic;
-      }
-
-      footer {
-        margin-top: 22px;
-        text-align: center;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      /* lightbox */
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.18s;
-      }
-      .lightbox.open {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .lightbox img {
-        max-width: 98%;
-        max-height: 92%;
-        border-radius: 6px;
-      }
-      .close {
-        position: absolute;
-        top: 18px;
-        right: 22px;
-        background: #fff;
-        border-radius: 999px;
-        padding: 8px;
-        cursor: pointer;
-      }
-
-      /* small helpers */
-      .muted {
-        color: var(--muted);
-      }
-      .section-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      @media (max-width: 464px) {
-        header {
-          background-color: white;
-          display: block;
-          text-align: center;
-        }
-      }
+        /* Lightbox animation */
+        #lightbox { transition: opacity 0.2s ease-in-out, visibility 0.2s; opacity: 0; visibility: hidden; }
+        #lightbox.active { opacity: 1; visibility: visible; }
+        
+        /* Video container aspect ratio fix */
+        .aspect-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .aspect-video-container iframe, .aspect-video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <img class="headshot" src="/images/MT.jpg" alt="Matthew Thomason headshot (replace with your image)" />
-        <div>
-          <h1>Matthew Thomason</h1>
-          <div class="meta">Actor — Nottingham / London • Playing age: 25–35 • Height: 6'2"</div>
-          <div style="margin-top: 10px; display: flex; gap: 10px; align-items: center">
-            <a class="btn btn-primary" href="Profile - About Me.pdf" download>Download Spotlight PDF</a>
-            <a class="btn" href="mailto:enquiries@spotlight.com">Contact / Book</a>
-          </div>
+</head>
+<body class="antialiased selection:bg-slate-800 selection:text-white">
+
+    <!-- Mobile Navigation / Header -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="font-bold text-xl tracking-tight text-slate-900">Matthew Thomason</div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-500">
+                    <a href="#about" class="hover:text-slate-900 transition">About</a>
+                    <a href="#media" class="hover:text-slate-900 transition">Reels</a>
+                    <a href="#credits" class="hover:text-slate-900 transition">Credits</a>
+                    <a href="#gallery" class="hover:text-slate-900 transition">Gallery</a>
+                </div>
+                <a href="mailto:enquiries@spotlight.com" class="bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-800 transition">
+                    Contact
+                </a>
+            </div>
         </div>
-      </header>
+    </nav>
 
-      <main style="margin-top: 20px" class="grid two-col">
-        <div style="display: grid; gap: 18px">
-          <section class="card">
-            <div class="section-header">
-              <h2 style="margin: 0">About</h2>
-              <!--<div class="muted" style="font-size:13px">Edit content in HTML</div>-->
-            </div>
-            <p style="margin-top: 12px">
-              Experienced stage and screen actor with excellent comic timing and physicality. Natural mover who can sing
-              and dance. Fluent French speaker. Reliable, collaborative and ready to contribute to every production.
-            </p>
-
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px">
-              <div>
-                <strong>Skills</strong>
-                <div class="muted" style="margin-top: 6px; font-size: 14px">
-                  Accents: RP, American-California, French, Northern, Scottish<br />Languages: French (fluent)<br />Singing,
-                  Dance, Movement
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- HEADER SECTION -->
+        <header class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+            <div class="md:flex">
+                <div class="md:shrink-0 bg-slate-100 md:w-48 h-48 md:h-auto relative group">
+                    <!-- Main Headshot -->
+                    <img class="h-full w-full object-cover object-center" 
+                         src="/images/MT.jpg" 
+                         onerror="this.src='https://placehold.co/400x400/e2e8f0/64748b?text=Headshot'"
+                         alt="Matthew Thomason">
                 </div>
-              </div>
-              <div>
-                <strong>Sports &amp; Licences</strong>
-                <div class="muted" style="margin-top: 6px; font-size: 14px">
-                  Freediving, Skateboarding, Sailing<br />Car & Motorcycle licence
+                <div class="p-8 flex flex-col justify-center w-full">
+                    <div class="uppercase tracking-wide text-sm text-indigo-600 font-semibold">Professional Actor</div>
+                    <h1 class="mt-2 text-3xl leading-8 font-bold text-slate-900 sm:text-4xl">Matthew Thomason</h1>
+                    <p class="mt-2 text-slate-500 flex flex-wrap gap-x-4 gap-y-1 text-sm md:text-base">
+                        <span>📍 Nottingham / London</span>
+                        <span>🎭 Playing Age: 25–35</span>
+                        <span>📏 Height: 6'2"</span>
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="Profile - About Me.pdf" download class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <i data-lucide="download" class="w-4 h-4 mr-2"></i> Download CV
+                        </a>
+                        <a href="mailto:enquiries@spotlight.com" class="inline-flex items-center px-4 py-2 border border-slate-300 text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50 focus:outline-none">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i> Email
+                        </a>
+                    </div>
                 </div>
-              </div>
-              <div>
-                <strong>Training</strong>
-                <div class="muted" style="margin-top: 6px; font-size: 14px">Actors Workshop Nottingham — part-time</div>
-              </div>
             </div>
-          </section>
-          <section class="card">
-            <h3 style="margin: 0 0 8px 0">Headshots</h3>
-            <div class="gallery">
-              <img
-                style="object-position: 50% 38%"
-                src="/images/MT1s.jpeg"
-                alt="production 3"
-                data-large="/images/MT1.jpg" />
-              <img
-                style="object-position: 50% 52%"
-                src="/images/MT2s.jpeg"
-                alt="production 3"
-                data-large="/images/MT2.jpg" />
-              <img
-                style="object-position: 50% 46%"
-                src="/images/MT3s.jpeg"
-                alt="production 3"
-                data-large="/images/MT3.jpg" />
-              <img
-                style="object-position: 50% 38%"
-                src="/images/MT4s.jpeg"
-                alt="production 3"
-                data-large="/images/MT4.jpg" />
-            </div>
-          </section>
-          <section class="card">
-            <div class="section-header">
-              <h2 style="margin: 0">Reels &amp; Clips</h2>
-              <div class="muted" style="font-size: 13px">
-                Paste YouTube/Vimeo URLs to <code>data-src</code> attributes.
-              </div>
-            </div>
+        </header>
 
-            <div class="reels" style="margin-top: 12px">
-              <div class="reel">
-                <div class="meta">Screen Showreel</div>
-                <!--<div class="player" data-src="" data-type="iframe">Click to load</div>-->
-                <div>
-                  <video controls>
-                    <source src="/videos/2025%20Showreel%20MT%20vf1080.mp4" type="video/mp4" />
-                    <!--<source src="movie.ogg" type="video/ogg">-->
-                    <!--Your browser does not support the video tag.-->
-                  </video>
-                </div>
-              </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT COLUMN (Main Content) -->
+            <main class="lg:col-span-2 space-y-8">
+                
+                <!-- ABOUT -->
+                <section id="about" class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                        <i data-lucide="user" class="w-5 h-5 mr-2 text-indigo-600"></i> About
+                    </h2>
+                    <div class="prose prose-slate text-slate-600 leading-relaxed">
+                        <p>
+                            Experienced stage and screen actor with excellent comic timing and physicality. 
+                            Natural mover who can sing and dance. Fluent French speaker. 
+                            Reliable, collaborative and ready to contribute to every production.
+                        </p>
+                    </div>
 
-              <div class="reel">
-                <div class="meta">Voice Reel</div>
-                <div class="player" data-src="" data-type="iframe">Click to load</div>
-              </div>
+                    <!-- Skills Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 pt-6 border-t border-slate-100">
+                        <div>
+                            <h3 class="font-semibold text-slate-900 text-sm uppercase tracking-wider mb-2">Skills</h3>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>Accents: RP, American-CA, French, Northern, Scottish</li>
+                                <li>Languages: French (fluent)</li>
+                                <li>Singing, Dance, Movement</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 text-sm uppercase tracking-wider mb-2">Sports & Licences</h3>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>Freediving, Skateboarding</li>
+                                <li>Sailing</li>
+                                <li>Car & Motorcycle licence</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 text-sm uppercase tracking-wider mb-2">Training</h3>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>Actors Workshop Nottingham</li>
+                                <li class="text-slate-400 text-xs">(Part-time)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
 
-              <div class="reel">
-                <div class="meta">Accent Reel</div>
-                <div class="player" data-src="" data-type="iframe">Click to load</div>
-              </div>
+                <!-- MEDIA / REELS -->
+                <section id="media" class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
+                        <i data-lucide="film" class="w-5 h-5 mr-2 text-indigo-600"></i> Reels & Clips
+                    </h2>
 
-              <div class="reel">
-                <div class="meta">Stunt / Combat Reel</div>
-                <div class="player" data-src="" data-type="iframe">Click to load</div>
-              </div>
+                    <!-- Primary Showreel (Large) -->
+                    <div class="mb-8">
+                        <h3 class="text-sm font-semibold text-slate-700 mb-3">Screen Showreel 2025</h3>
+                        <div class="bg-black rounded-lg overflow-hidden shadow-md">
+                            <!-- 
+                                VIDEO FIX: 
+                                1. Using standard HTML5 video tag. 
+                                2. Added poster attribute for a thumbnail before play.
+                                3. Ensure '/videos/showreel-2025-720.mp4' exists in your folder.
+                            -->
+                            <video controls class="w-full aspect-video" poster="/images/poster-placeholder.jpg">
+                                <source src="/videos/showreel-2025-720.mp4" type="video/mp4">
+                                <!-- Fallback message if video fails -->
+                                <div class="flex items-center justify-center h-full text-white p-10 text-center">
+                                    <p>Video file not found.<br><span class="text-sm text-gray-400">Ensure /videos/showreel-2025-720.mp4 exists.</span></p>
+                                </div>
+                            </video>
+                        </div>
+                    </div>
 
-              <div class="reel">
-                <div class="meta">Singing Reel</div>
-                <div class="player" data-src="" data-type="iframe">Click to load</div>
-              </div>
+                    <!-- Secondary Reels Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Voice Reel -->
+                        <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
+                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Voice Reel</div>
+                            <!-- If using YouTube/Vimeo, replace the div below with the iframe code -->
+                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="https://www.youtube.com/embed/PLACEHOLDER_ID">
+                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
+                            </div>
+                        </div>
 
-              <div class="reel">
-                <div class="meta">Dance Reel</div>
-                <div class="player" data-src="" data-type="iframe">Click to load</div>
-              </div>
-            </div>
-          </section>
+                        <!-- Accent Reel -->
+                        <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
+                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Accent Reel</div>
+                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="">
+                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Singing Reel -->
+                        <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
+                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Singing Reel</div>
+                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="">
+                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
+                            </div>
+                        </div>
 
-          <section class="card">
-            <h2 style="margin: 0 0 10px 0">Selected Credits</h2>
-            <ul class="credits" style="list-style: none; padding: 0; margin: 0; font-size: 15px">
-              <li><strong>Lovers' Vows</strong> — Frederic Friburg • Kenneth Michaels • 2025 (Stage)</li>
-              <li>
-                <strong>The Polar Express</strong> — Conductor/Hobo/Chef • Paul Andrew Goldsmith • 2024 (Immersive)
-              </li>
-              <li>
-                <strong>Guys &amp; Dolls</strong> — Harry the Horse / Benny Southstreet • Chris Sims • 2024 (Musical)
-              </li>
-              <li><strong>TAWN-19</strong> — Everett Pickering • Tim Bryn Smith • 2020 (Feature Film)</li>
-            </ul>
-            <div class="muted" style="margin-top: 10px">
-              Full credits are available in the downloadable Spotlight PDF.
-            </div>
-          </section>
+                        <!-- Dance Reel -->
+                        <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
+                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Dance Reel</div>
+                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="">
+                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4 text-center">Click tiles to load players (requires data-src in HTML)</p>
+                </section>
+
+                <!-- SELECTED CREDITS -->
+                <section id="credits" class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+                    <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center">
+                        <i data-lucide="list-video" class="w-5 h-5 mr-2 text-indigo-600"></i> Selected Credits
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Credit Item -->
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-start border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                            <div class="sm:w-24 text-sm font-bold text-indigo-600 shrink-0">2025</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Lovers' Vows</h3>
+                                <p class="text-sm text-slate-600">Frederic Friburg • Kenneth Michaels • Stage</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-start border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                            <div class="sm:w-24 text-sm font-bold text-indigo-600 shrink-0">2024</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">The Polar Express</h3>
+                                <p class="text-sm text-slate-600">Conductor/Hobo/Chef • Paul Andrew Goldsmith • Immersive</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-start border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                            <div class="sm:w-24 text-sm font-bold text-indigo-600 shrink-0">2024</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Guys & Dolls</h3>
+                                <p class="text-sm text-slate-600">Harry the Horse / Benny Southstreet • Chris Sims • Musical</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-start border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                            <div class="sm:w-24 text-sm font-bold text-indigo-600 shrink-0">2020</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">TAWN-19</h3>
+                                <p class="text-sm text-slate-600">Everett Pickering • Tim Bryn Smith • Feature Film</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- RIGHT COLUMN (Sidebar) -->
+            <aside class="space-y-8">
+                
+                <!-- HEADSHOTS MINI GALLERY -->
+                <section id="gallery" class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-900 mb-4">Headshots</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <!-- Gallery Items: Add 'gallery-trigger' class and data-full-src attribute -->
+                        <img src="/images/MT1s.jpeg" 
+                             data-full-src="/images/MT1.jpg" 
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100 hover:opacity-90 transition"
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Shot+1'"
+                             alt="Headshot 1">
+                        <img src="/images/MT2s.jpeg" 
+                             data-full-src="/images/MT2.jpg" 
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100 hover:opacity-90 transition"
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Shot+2'"
+                             alt="Headshot 2">
+                        <img src="/images/MT3s.jpeg" 
+                             data-full-src="/images/MT3.jpg" 
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100 hover:opacity-90 transition"
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Shot+3'"
+                             alt="Headshot 3">
+                        <img src="/images/MT4s.jpeg" 
+                             data-full-src="/images/MT4.jpg" 
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100 hover:opacity-90 transition"
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Shot+4'"
+                             alt="Headshot 4">
+                    </div>
+                </section>
+
+                <!-- TESTIMONIALS -->
+                <section class="bg-gradient-to-br from-indigo-900 to-slate-900 rounded-xl shadow-md p-6 text-white">
+                    <h3 class="font-bold text-indigo-100 mb-4 flex items-center">
+                        <i data-lucide="quote" class="w-4 h-4 mr-2"></i> Director Feedback
+                    </h3>
+                    <div class="space-y-6">
+                        <blockquote class="border-l-2 border-indigo-500 pl-4 italic text-indigo-50 text-sm leading-relaxed">
+                            “A calming and positive presence on set — incredibly reliable and inventive.”
+                            <footer class="not-italic text-indigo-300 text-xs mt-2 font-semibold">— Director Name</footer>
+                        </blockquote>
+                        <blockquote class="border-l-2 border-indigo-500 pl-4 italic text-indigo-50 text-sm leading-relaxed">
+                            “Fantastic comic timing and physicality; a natural mover.”
+                            <footer class="not-italic text-indigo-300 text-xs mt-2 font-semibold">— Director Name</footer>
+                        </blockquote>
+                    </div>
+                </section>
+
+                <!-- PRODUCTION GALLERY -->
+                <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="font-bold text-slate-900 mb-4">On Set / Stage</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <img src="/images/IMG_3633.JPG" data-full-src="/images/IMG_3633.JPG" 
+                             class="gallery-trigger col-span-2 w-full h-48 object-cover rounded-lg cursor-pointer bg-slate-100"
+                             onerror="this.src='https://placehold.co/600x400/e2e8f0/64748b?text=Production+Still'" alt="Production 1">
+                        
+                        <img src="/images/matthew-action5%20copy.jpg" data-full-src="/images/matthew-action5.jpg"
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100" 
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Action'" alt="Production 2">
+                        
+                        <img src="/imgs/LMT_Guys%20n%20Dolls_034copy.jpg" data-full-src="/imgs/LMT_Guys%20n%20Dolls_034.jpg"
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100" 
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Guys+Dolls'" alt="Production 3">
+                             
+                         <img src="/imgs/LMT_Nell%20Gwynn_1%20copy.jpg" data-full-src="/imgs/LMT_Nell%20Gwynn_1.jpg"
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100" 
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Nell+Gwynn'" alt="Production 4">
+
+                         <img src="/images/matthew-action1%20copy.jpg" data-full-src="/images/matthew-action1.jpg"
+                             class="gallery-trigger w-full h-32 object-cover rounded-lg cursor-pointer bg-slate-100" 
+                             onerror="this.src='https://placehold.co/300x400/e2e8f0/64748b?text=Action+2'" alt="Production 5">
+                    </div>
+                </section>
+            </aside>
         </div>
-{"path":"/tauri/Users/matthew/Documents/GitHub/actor/images/matthew-action3 copy.jpg"}
-        <aside style="display: grid; gap: 18px">
-          <section class="card">
-            <h3 style="margin: 0 0 8px 0">Practical</h3>
-            <div class="muted">
-              Representation: Self-represented — enquiries:
-              <a href="mailto:enquiries@spotlight.com">enquiries@spotlight.com</a>
-            </div>
-            <div style="margin-top: 10px" class="muted">
-              Height: 6'2" • Playing age: 25–35 • Location: Nottingham / London
-            </div>
-          </section>
-          <section class="card">
-            <h3 style="margin: 0 0 8px 0">Production Gallery</h3>
-            <div class="gallery">
-              <img
-                style="object-position: 50% 20%"
-                src="/images/IMG_3633.JPG"
-                alt="production 1"
-                data-large="/images/IMG_3633.JPG" />
-              <img
-                style="object-position: 50% 0%"
-                src="/images/matthew-action5%20copy.jpg"
-                alt="production 2"
-                data-large="/images/matthew-action5.jpg" />
-              <img
-                style="object-position: 73% 11%"
-                src="/imgs/LMT_Guys%20n%20Dolls_034copy.jpg"
-                alt="production 3"
-                data-large="/imgs/LMT_Guys%20n%20Dolls_034.jpg" />
-              <img
-                style="object-position: 50% 22%"
-                src="/imgs/LMT_Nell%20Gwynn_1%20copy.jpg"
-                alt="production 4"
-                data-large="/imgs/LMT_Nell%20Gwynn_1.jpg" />
-              <img
-                style="object-position: 45% 32%"
-                src="/images/matthew-action1%20copy.jpg"
-                alt="production 5"
-                data-large="/images/matthew-action1.jpg" />
-              <img
-                style="object-position: 72% 12%"
-                src="/images/matthew-action2%20copy.jpg"
-                alt="headshot 2"
-                data-large="/images/matthew-action1.jpg" />
-              
-            </div>
-            <div class="muted" style="margin-top: 8px; font-size: 13px">Click an image to view full size.</div>
-          </section>
-          <section class="card">
-            <h2 style="margin: 0 0 10px 0">Director Feedback</h2>
-            <div style="display: grid; gap: 10px">
-              <blockquote>
-                “A calming and positive presence on set — incredibly reliable and inventive.” — Director (replace with
-                real name)
-              </blockquote>
-              <blockquote>
-                “Fantastic comic timing and physicality; a natural mover.” — Director (replace with real name)
-              </blockquote>
-            </div>
-          </section>
-          <section class="card">
-            <h3 style="margin: 0 0 8px 0">Downloads</h3>
-            <a class="btn" href="Profile - About Me.pdf" download>Download Spotlight PDF</a>
-          </section>
-        </aside>
-      </main>
 
-      <footer>© Matthew Thomason — actor. Built with a single HTML file.</footer>
+        <footer class="mt-16 text-center text-slate-400 text-sm pb-8">
+            <p>&copy; 2025 Matthew Thomason. All rights reserved.</p>
+        </footer>
     </div>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true">
-      <button class="close" id="lbClose" aria-label="Close">✕</button>
-      <img id="lbImage" src="/images/IMG_3633.JPG" alt="" />
+    <!-- IMPROVED LIGHTBOX OVERLAY -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4" aria-hidden="true">
+        <!-- Close Button -->
+        <button id="lb-close" class="absolute top-4 right-4 text-white hover:text-gray-300 focus:outline-none p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+
+        <!-- Loading Spinner -->
+        <div id="lb-loader" class="absolute inset-0 flex items-center justify-center pointer-events-none text-white">
+            <i data-lucide="loader-2" class="w-8 h-8 animate-spin"></i>
+        </div>
+
+        <!-- Main Image -->
+        <img id="lb-image" src="" alt="Full size" class="max-h-[90vh] max-w-[95vw] shadow-2xl rounded-md opacity-0 transition-opacity duration-300 object-contain select-none">
     </div>
 
     <script>
-      // Simple lightbox
-      const gallery = document.querySelectorAll(".gallery img");
-      const lightbox = document.getElementById("lightbox");
-      const lbImg = document.getElementById("lbImage");
-      const lbClose = document.getElementById("lbClose");
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-      gallery.forEach((img) => {
-        img.addEventListener("click", () => {
-          lbImg.src = img.dataset.large || img.src;
-          lightbox.classList.add("open");
-          lightbox.setAttribute("aria-hidden", "false");
-        });
-      });
-      lbClose.addEventListener("click", () => {
-        lightbox.classList.remove("open");
-        lightbox.setAttribute("aria-hidden", "true");
-        lbImg.src = "";
-      });
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-          lightbox.classList.remove("open");
-          lightbox.setAttribute("aria-hidden", "true");
-          lbImg.src = "";
+        // --- ROBUST LIGHTBOX SCRIPT ---
+        const lightbox = document.getElementById('lightbox');
+        const lbImage = document.getElementById('lb-image');
+        const lbClose = document.getElementById('lb-close');
+        const lbLoader = document.getElementById('lb-loader');
+        const triggers = document.querySelectorAll('.gallery-trigger');
+
+        function openLightbox(src) {
+            // Show loading spinner, hide image initially
+            lbLoader.style.display = 'flex';
+            lbImage.style.opacity = '0';
+            
+            // Set source
+            lbImage.src = src;
+            
+            // Show lightbox container
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+            // When image loads, show it and hide spinner
+            lbImage.onload = () => {
+                lbLoader.style.display = 'none';
+                lbImage.style.opacity = '1';
+            };
+            
+            // Handle load errors
+            lbImage.onerror = () => {
+                lbLoader.style.display = 'none';
+                alert("Could not load full resolution image.");
+                closeLightbox();
+            };
         }
-      });
 
-      // Lazy-load reels on click — paste video URLs into data-src attributes above
-      document.querySelectorAll(".player").forEach((player) => {
-        player.addEventListener("click", () => {
-          const src = player.dataset.src && player.dataset.src.trim();
-          if (!src) {
-            player.innerHTML = '<span style="color:#9ca3af">No URL set — edit HTML to add video URL in data-src</span>';
-            return;
-          }
-          const iframe = document.createElement("iframe");
-          iframe.src = src;
-          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          iframe.setAttribute("allowfullscreen", "");
-          player.innerHTML = "";
-          player.appendChild(iframe);
-        });
-      });
-
-      // Accessibility: allow closing lightbox with Escape
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          lightbox.classList.remove("open");
-          lightbox.setAttribute("aria-hidden", "true");
-          lbImg.src = "";
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            setTimeout(() => {
+                lbImage.src = ''; // Clear src to stop memory leaks
+            }, 200);
         }
-      });
+
+        // Add Event Listeners to all images
+        triggers.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Prefer data-full-src, fallback to src
+                const fullSrc = img.getAttribute('data-full-src') || img.src;
+                openLightbox(fullSrc);
+            });
+        });
+
+        // Close on X button
+        lbClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Close on clicking background
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+
+        // --- LAZY LOAD VIDEO IFRAMES ---
+        // This allows you to have many youtube videos without slowing down the page load
+        document.querySelectorAll('.video-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const src = this.getAttribute('data-src');
+                
+                if (!src || src.length < 5) {
+                    this.innerHTML = '<span class="text-white text-sm p-4 text-center">No video URL provided.<br>Edit HTML data-src attribute.</span>';
+                    return;
+                }
+
+                const iframe = document.createElement('iframe');
+                iframe.src = src;
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.setAttribute("allowfullscreen", "");
+                iframe.className = "absolute top-0 left-0 w-full h-full rounded-lg";
+                
+                // Clear the placeholder content (play button) and add iframe
+                this.innerHTML = ''; 
+                this.appendChild(iframe);
+                this.classList.remove('cursor-pointer', 'bg-slate-800'); // Remove pointer styles once playing
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
