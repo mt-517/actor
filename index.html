@@ -170,18 +170,26 @@
 
                         <!-- Voice Reel -->
                         <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
-                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Voice Reel</div>
-                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="https://www.youtube.com/embed/PLACEHOLDER_ID">
-                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
-                            </div>
+                            <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Commercial Voice Reel</div>
+                            <video controls class="w-full aspect-video" poster="/images/poster6.jpg">
+                                <source src="/videos/VO.mp4" type="video/mp4">
+                                <!-- Fallback message if video fails -->
+                                <div class="flex items-center justify-center h-full text-white p-10 text-center">
+                                    <p>Video file not found.<br><span class="text-sm text-gray-400">Ensure /videos/showreel-2025-1080.mp4 exists.</span></p>
+                                </div>
+                            </video>
                         </div>
 
                         <!-- Accent Reel -->
                         <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
                             <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Accent Reel</div>
-                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="">
-                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
-                            </div>
+                            <video controls class="w-full aspect-video" poster="/images/poster2.jpg">
+                                <source src="/videos/showreel-2025-1080.mp4" type="video/mp4">
+                                <!-- Fallback message if video fails -->
+                                <div class="flex items-center justify-center h-full text-white p-10 text-center">
+                                    <p>Video file not found.<br><span class="text-sm text-gray-400">Ensure /videos/showreel-2025-1080.mp4 exists.</span></p>
+                                </div>
+                            </video>
                         </div>
                         
                         <!-- Singing Reel -->
@@ -199,9 +207,13 @@
                         <!-- Dance Reel -->
                         <div class="group relative bg-slate-100 rounded-lg overflow-hidden">
                             <div class="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded">Dance Reel</div>
-                            <div class="aspect-video-container bg-slate-800 flex items-center justify-center cursor-pointer video-trigger" data-src="">
-                                <i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-white transition transform group-hover:scale-110"></i>
-                            </div>
+                            <video controls class="w-full aspect-video" poster="/images/poster5.jpeg">
+                                <source src="/videos/dance.mp4" type="video/mp4">
+                                <!-- Fallback message if video fails -->
+                                <div class="flex items-center justify-center h-full text-white p-10 text-center">
+                                    <p>Video file not found.<br><span class="text-sm text-gray-400">Ensure /videos/showreel-2025-1080.mp4 exists.</span></p>
+                                </div>
+                            </video>
                         </div>
                     </div>
                     <!--<p class="text-xs text-slate-400 mt-4 text-center">Click tiles to load players (requires data-src in HTML)</p>-->
